@@ -1,0 +1,51 @@
+networks:
+  frontend:
+  backend:
+
+services:
+# -----------proxy server -------------
+  reverse-proxy:
+    build:
+      context: ./reverse-proxy
+    networks:
+      - frontend
+      - backend
+    ports: 
+      - "80:80"
+    extra_hosts:
+      - "server-1.local:172.18.0.3"
+      - "server-2.local:172.18.0.4"
+
+# -----------server---------------
+  server-1:
+    build:
+      context: ./server/server-1
+    networks:
+      - backend
+    expose:
+      - "8000"
+    extra_hosts:
+      - "server-1.local:172.18.0.3"
+
+  server-2:
+    build:
+      context: ./server/server-2
+    networks:
+      - backend
+    expose:
+      - "8000"
+    extra_hosts:
+      - "server-2.local:172.18.0.4"
+
+# ----------client----------------
+  client:
+    build:
+      context: ./client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client/hosts:/etc/hosts:ro
+    networks:
+      - frontend
+    tty: true
+    stdin_open: true
