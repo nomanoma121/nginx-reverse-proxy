@@ -19,7 +19,7 @@ services:
       frontend:
         ipv4_address: 192.168.0.10
       backend:
-        ipv4_address: 172.28.0.1
+        ipv4_address: 172.28.0.3
     ports: 
       - "80:80"
 
