@@ -21,8 +21,6 @@ services:
         ipv4_address: 192.168.0.10
       backend:
         ipv4_address: 172.28.0.3
-    ports: 
-      - "80:80"
 
 # -----------backend server---------------
   server-1:
@@ -32,8 +30,6 @@ services:
     networks:
       backend:
         ipv4_address: "172.28.0.5"
-    expose:
-      - "8000"
 
   server-2:
     container_name: server-2
@@ -42,9 +38,6 @@ services:
     networks:
       backend:
         ipv4_address: "172.28.0.20"
-
-    expose:
-      - "8000"
 
 # ----------client----------------
   client:
