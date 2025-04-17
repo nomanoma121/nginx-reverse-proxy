@@ -13,6 +13,7 @@ networks:
 services:
 # -----------proxy server -------------
   reverse-proxy:
+    container_name: reverse-proxy
     build:
       context: ./reverse-proxy
     networks:
@@ -25,6 +26,7 @@ services:
 
 # -----------backend server---------------
   server-1:
+    container_name: server-1
     build:
       context: ./server/server-1
     networks:
@@ -34,6 +36,7 @@ services:
       - "8000"
 
   server-2:
+    container_name: server-2
     build:
       context: ./server/server-2
     networks:
@@ -45,6 +48,7 @@ services:
 
 # ----------client----------------
   client:
+    container_name: client
     build:
       context: ./client
     ports:

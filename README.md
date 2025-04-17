@@ -31,7 +31,7 @@ graph TD
 
 次に`client`コンテナに入ります
 
-`docker exec -it <client-container-id> sh`
+`docker exec -it client sh`
 
 ※ client コンテナをわざわざ使っている理由は、server-1.local などのホスト名を使用するためにホスト側で設定をする必要があり、ローカル環境を汚したくないからです。
 
