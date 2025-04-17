@@ -1,6 +1,14 @@
 networks:
   frontend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "192.168.0.0/24"
   backend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.28.0.0/24"
 
 services:
 # -----------proxy server -------------
@@ -8,17 +16,19 @@ services:
     build:
       context: ./reverse-proxy
     networks:
-      - frontend
-      - backend
+      frontend:
+        ipv4_address: 192.168.0.10
+      backend:
     ports: 
       - "80:80"
 
-# -----------server---------------
+# -----------backend server---------------
   server-1:
     build:
       context: ./server/server-1
     networks:
-      - backend
+      backend:
+        ipv4_address: "172.28.0.5"
     expose:
       - "8000"
 
@@ -26,7 +36,9 @@ services:
     build:
       context: ./server/server-2
     networks:
-      - backend
+      backend:
+        ipv4_address: "172.28.0.20"
+
     expose:
       - "8000"
 
@@ -39,6 +51,8 @@ services:
     volumes:
       - ./client/hosts:/etc/hosts:ro
     networks:
-      - frontend
+      frontend:
+        ipv4_address: "192.168.0.2"
+
     tty: true
     stdin_open: true
