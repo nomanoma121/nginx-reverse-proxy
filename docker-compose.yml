@@ -12,9 +12,6 @@ services:
       - backend
     ports: 
       - "80:80"
-    extra_hosts:
-      - "server-1.local:172.18.0.3"
-      - "server-2.local:172.18.0.4"
 
 # -----------server---------------
   server-1:
@@ -24,8 +21,6 @@ services:
       - backend
     expose:
       - "8000"
-    extra_hosts:
-      - "server-1.local:172.18.0.3"
 
   server-2:
     build:
@@ -34,8 +29,6 @@ services:
       - backend
     expose:
       - "8000"
-    extra_hosts:
-      - "server-2.local:172.18.0.4"
 
 # ----------client----------------
   client:
