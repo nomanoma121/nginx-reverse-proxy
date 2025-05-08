@@ -7,14 +7,17 @@
 graph TD
   client[Client<br>192.168.0.2]
 
-  subgraph backend
-    proxy[Reverse Proxy<br>Nginx<br>192.168.0.10, 172.28.0.3]
-    server1[server-1<br>172.28.0.5]
-    server2[server-2<br>172.28.0.20]
-  end
-
   subgraph frontend
     client
+  end
+
+  subgraph reverseproxy["Reverse Proxy"]
+    proxy[Reverse Proxy<br>Nginx<br>192.168.0.10, 172.28.0.3]
+  end
+
+  subgraph backend
+    server1[server-1<br>172.28.0.5]
+    server2[server-2<br>172.28.0.20]
   end
 
   client --> proxy
